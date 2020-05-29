@@ -33,7 +33,7 @@ reg 	[3:0] 	cnt;
 reg	[7:0]    doc;
 reg	[7:0] 	dic;
 
-//Êı¾İ½ÓÊÕ
+//æ•°æ®æ¥æ”¶
 always @(negedge clk,negedge en) begin
 	if(en == 1'b0) begin
 		doc <= 8'hff;
@@ -53,7 +53,7 @@ always @(posedge clk,negedge en) begin
 	end
 end
 
-//Êı¾İ·¢ËÍ
+//æ•°æ®å‘é€
 always @(posedge clk,negedge en) begin
 	if(en == 1'b0) begin
 		sout <= 1'b1;
@@ -64,7 +64,7 @@ always @(posedge clk,negedge en) begin
 	end
 end
 
-//µ÷Õû½ÓÊÕÎ»
+//è°ƒæ•´æ¥æ”¶ä½
 always @(negedge clk,negedge en) begin
 	if(en == 1'b0) begin
 		cnt <= 4'd0;
@@ -79,7 +79,7 @@ always @(negedge clk,negedge en) begin
 	end
 end
 
-//µ÷Õû±êÖ¾
+//è°ƒæ•´æ ‡å¿—
 always @(negedge clk,negedge en) begin
 	if (en == 1'b0) begin
 		infl <= 1'b0;

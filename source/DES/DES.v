@@ -18,10 +18,10 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-//data_out Êı¾İÊä³ö64Î»
-//data_in Êı¾İÊäÈë64Î»
-//key ÃÜÔ¿64Î»
-//mode Ä£Ê½£¬1¼ÓÃÜ£¬0½âÃÜ
+//data_out æ•°æ®è¾“å‡º64ä½
+//data_in æ•°æ®è¾“å…¥64ä½
+//key å¯†é’¥64ä½
+//mode æ¨¡å¼ï¼Œ1åŠ å¯†ï¼Œ0è§£å¯†
 module DES(
     output [1:64] data_out,
     input [1:64] data_in,
@@ -29,18 +29,18 @@ module DES(
     input mode 
     );
 
-wire[1:56] movedkey1,movedkey2,movedkey3,movedkey4,movedkey5,movedkey6,movedkey7,movedkey8,movedkey9,movedkey10,movedkey11,movedkey12,movedkey13,movedkey14,movedkey15,movedkey16;//´æ·ÅÒÆÎ»ºóµÄ³õÊ¼ÃÜÔ¿
-wire[1:48] roundkey1,roundkey2,roundkey3,roundkey4,roundkey5,roundkey6,roundkey7,roundkey8,roundkey9,roundkey10,roundkey11,roundkey12,roundkey13,roundkey14,roundkey15,roundkey16;//´æ·Å16¸öÑ­»·ÃÜÔ¿
+wire[1:56] movedkey1,movedkey2,movedkey3,movedkey4,movedkey5,movedkey6,movedkey7,movedkey8,movedkey9,movedkey10,movedkey11,movedkey12,movedkey13,movedkey14,movedkey15,movedkey16;//å­˜æ”¾ç§»ä½åçš„åˆå§‹å¯†é’¥
+wire[1:48] roundkey1,roundkey2,roundkey3,roundkey4,roundkey5,roundkey6,roundkey7,roundkey8,roundkey9,roundkey10,roundkey11,roundkey12,roundkey13,roundkey14,roundkey15,roundkey16;//å­˜æ”¾16ä¸ªå¾ªç¯å¯†é’¥
 
 wire[1:64] ocac;
-wire[1:64] iperi;//IPÄ©ÖÃ»»µÄÊäÈë
+wire[1:64] iperi;//IPæœ«ç½®æ¢çš„è¾“å…¥
 
-wire [1:64] enco16;//´æ·ÅµÚ16ÂÖ¼Ó½âÃÜÊä³ö
-wire [1:64] enci2,enci3,enci4,enci5,enci6,enci7,enci8,enci9,enci10,enci11,enci12,enci13,enci14,enci15,enci16;//´æ·ÅÃ¿ÂÖ¼ÓÃÜÊäÈë
-wire [1:48] encrk1,encrk2,encrk3,encrk4,encrk5,encrk6,encrk7,encrk8,encrk9,encrk10,encrk11,encrk12,encrk13,encrk14,encrk15,encrk16;//´æ·ÅÃ¿ÂÖ¼ÓÃÜËùÓÃÂÖÃÜÔ¿
-wire [1:64] ipro;//IPÖÃ»»Êä³ö
+wire [1:64] enco16;//å­˜æ”¾ç¬¬16è½®åŠ è§£å¯†è¾“å‡º
+wire [1:64] enci2,enci3,enci4,enci5,enci6,enci7,enci8,enci9,enci10,enci11,enci12,enci13,enci14,enci15,enci16;//å­˜æ”¾æ¯è½®åŠ å¯†è¾“å…¥
+wire [1:48] encrk1,encrk2,encrk3,encrk4,encrk5,encrk6,encrk7,encrk8,encrk9,encrk10,encrk11,encrk12,encrk13,encrk14,encrk15,encrk16;//å­˜æ”¾æ¯è½®åŠ å¯†æ‰€ç”¨è½®å¯†é’¥
+wire [1:64] ipro;//IPç½®æ¢è¾“å‡º
 
-//Éú³ÉÂÖÃÜÔ¿
+//ç”Ÿæˆè½®å¯†é’¥
 KeyIniReplace kip(.initial_key(key),.kc(movedkey1));
 
 RoundKeyGenerator rkg1(.round_key(roundkey1),.moved_key(movedkey2),.mode(1'b0),.initial_key(movedkey1));
@@ -60,7 +60,7 @@ RoundKeyGenerator rkg14(.round_key(roundkey14),.moved_key(movedkey15),.mode(1'b1
 RoundKeyGenerator rkg15(.round_key(roundkey15),.moved_key(movedkey16),.mode(1'b1),.initial_key(movedkey15));
 RoundKeyGenerator rkg16(.round_key(roundkey16),.mode(1'b0),.initial_key(movedkey16));
 
-//ÉèÖÃÂÖÃÜÔ¿
+//è®¾ç½®è½®å¯†é’¥
 assign encrk1 = mode ? roundkey1 : roundkey16;
 assign encrk2 = mode ? roundkey2 : roundkey15;
 assign encrk3 = mode ? roundkey3 : roundkey14;
@@ -78,10 +78,10 @@ assign encrk14 = mode ? roundkey14 : roundkey3;
 assign encrk15 = mode ? roundkey15 : roundkey2;
 assign encrk16 = mode ? roundkey16 : roundkey1;
 
-//IPÖÃ»»
+//IPç½®æ¢
 IPReplace ipr(.data_in(data_in),.data_out(ipro));
 
-//16ÂÖ¼Ó½âÃÜ
+//16è½®åŠ è§£å¯†
 EncryptCycle enc1(.data_in(ipro),.round_key(encrk1),.data_out(enci2));
 EncryptCycle enc2(.data_in(enci2),.round_key(encrk2),.data_out(enci3));
 EncryptCycle enc3(.data_in(enci3),.round_key(encrk3),.data_out(enci4));
@@ -101,7 +101,7 @@ EncryptCycle enc16(.data_in(enci16),.round_key(encrk16),.data_out(enco16));
 
 assign iperi = {enco16[33:64],enco16[1:32]};
 
-//IPÄ©ÖÃ»»
+//IPæœ«ç½®æ¢
 IPEndReplace iper(.data_in(iperi),.data_out(ocac));
 assign data_out = ocac;
 endmodule

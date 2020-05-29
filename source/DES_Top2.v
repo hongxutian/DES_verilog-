@@ -19,22 +19,22 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 
-//desÄ£¿éµÄÊı¾İ´«Êä¸ñÊ½
-//1¡¢·¢ËÍ¸øÄ£¿éµÄÊı¾İ¸ñÊ½
-//±êÊ¶+Êı¾İÌî³ä¸ñÊ½+ÃÜÔ¿+CBC ivÆ«ÒÆÁ¿+Êı¾İ³¤¶È+Êı¾İ
-//±êÊ¶£º0x11 ECB¼ÓÃÜ£¬0x12 ECB½âÃÜ£¬0x21 CBC¼ÓÃÜ£¬0x22CBC½âÃÜ
-//Êı¾İÌî³ä¸ñÊ½£º0x01 zeropadding£¬0x02 pkcs7padding
-//ÃÜÔ¿£º8¸ö×Ö½Ú
-//CBC ivÆ«ÒÆÁ¿£º8¸ö×Ö½Ú£¬CBCÄ£Ê½ĞèÒª´«Êä£¬ECBÄ£Ê½²»Òª´«Êä
-//Êı¾İ³¤¶È£º4¸ö×Ö½Ú£¬¸ßÎ»×Ö½ÚÔÚÇ°
-//Êı¾İ£ºÄ£¿é»á½ÓÊÕÊı¾İ³¤¶È¹æ¶¨µÄÊı¾İ×Ö½ÚÊı
+//desæ¨¡å—çš„æ•°æ®ä¼ è¾“æ ¼å¼
+//1ã€å‘é€ç»™æ¨¡å—çš„æ•°æ®æ ¼å¼
+//æ ‡è¯†+æ•°æ®å¡«å……æ ¼å¼+å¯†é’¥+CBC ivåç§»é‡+æ•°æ®é•¿åº¦+æ•°æ®
+//æ ‡è¯†ï¼š0x11 ECBåŠ å¯†ï¼Œ0x12 ECBè§£å¯†ï¼Œ0x21 CBCåŠ å¯†ï¼Œ0x22CBCè§£å¯†
+//æ•°æ®å¡«å……æ ¼å¼ï¼š0x01 zeropaddingï¼Œ0x02 pkcs7padding
+//å¯†é’¥ï¼š8ä¸ªå­—èŠ‚
+//CBC ivåç§»é‡ï¼š8ä¸ªå­—èŠ‚ï¼ŒCBCæ¨¡å¼éœ€è¦ä¼ è¾“ï¼ŒECBæ¨¡å¼ä¸è¦ä¼ è¾“
+//æ•°æ®é•¿åº¦ï¼š4ä¸ªå­—èŠ‚ï¼Œé«˜ä½å­—èŠ‚åœ¨å‰
+//æ•°æ®ï¼šæ¨¡å—ä¼šæ¥æ”¶æ•°æ®é•¿åº¦è§„å®šçš„æ•°æ®å­—èŠ‚æ•°
 //
-//×¢1£ºÊı¾İ·¢ËÍÍê±Ïºó¿ÉÒÔ·¢ËÍ0xff£¬0xffÎª¿ÕÏĞ×Ö·û£¬Ä£¿é²»»á´¦Àí£¬·¢ËÍ0xffµÈ´ıÄ£¿é´¦ÀíÍê±Ï£¬
-//Ä£¿éÔÚÃ»ÓĞÓĞĞ§Êı¾İ·¢³öÇ°»á·¢ËÍ0xff,ÓĞÓĞĞ§Êı¾İ·¢³öÊ±£¬ÏÈ·¢ËÍ0x01Êı¾İÆğÊ¼£¬È»ºó·¢ËÍÓĞĞ§Êı
-//¾İ£¬ÓĞĞ§Êı¾İ·¢ËÍÍê±ÏÖ®ºó£¬¼ÌĞø·¢ËÍ0xff
+//æ³¨1ï¼šæ•°æ®å‘é€å®Œæ¯•åå¯ä»¥å‘é€0xffï¼Œ0xffä¸ºç©ºé—²å­—ç¬¦ï¼Œæ¨¡å—ä¸ä¼šå¤„ç†ï¼Œå‘é€0xffç­‰å¾…æ¨¡å—å¤„ç†å®Œæ¯•ï¼Œ
+//æ¨¡å—åœ¨æ²¡æœ‰æœ‰æ•ˆæ•°æ®å‘å‡ºå‰ä¼šå‘é€0xff,æœ‰æœ‰æ•ˆæ•°æ®å‘å‡ºæ—¶ï¼Œå…ˆå‘é€0x01æ•°æ®èµ·å§‹ï¼Œç„¶åå‘é€æœ‰æ•ˆæ•°
+//æ®ï¼Œæœ‰æ•ˆæ•°æ®å‘é€å®Œæ¯•ä¹‹åï¼Œç»§ç»­å‘é€0xff
 //
-//×¢2£ºÄ£¿é²ÉÓÃSPIĞ­Òé´«Êä£¬¿ÕÏĞÊ±Ê±ÖÓĞÅºÅÎªµÍµçÆ½£¬µÚÒ»¸öÊ±ÖÓ±ßÑØ·¢ËÍÊı¾İ£¨¼´ÉÏÉıÑØ·¢ËÍÊı¾İ£©£¬
-//µÚ¶ş¸öÊ±ÖÓ±ßÑØ½ÓÊÕÊı¾İ£¨¼´ÏÂ½µÑØ½ÓÊÕÊı¾İ£©
+//æ³¨2ï¼šæ¨¡å—é‡‡ç”¨SPIåè®®ä¼ è¾“ï¼Œç©ºé—²æ—¶æ—¶é’Ÿä¿¡å·ä¸ºä½ç”µå¹³ï¼Œç¬¬ä¸€ä¸ªæ—¶é’Ÿè¾¹æ²¿å‘é€æ•°æ®ï¼ˆå³ä¸Šå‡æ²¿å‘é€æ•°æ®ï¼‰ï¼Œ
+//ç¬¬äºŒä¸ªæ—¶é’Ÿè¾¹æ²¿æ¥æ”¶æ•°æ®ï¼ˆå³ä¸‹é™æ²¿æ¥æ”¶æ•°æ®ï¼‰
 
 module DES_Top2(
 	input		wire						SCLK,
@@ -43,64 +43,64 @@ module DES_Top2(
 	output		wire						MISO
     );
 
-parameter 		s0 = 8'd0,//¿ÕÏĞ×´Ì¬
-				s1 = 8'd1,//½ÓÊÕ²ÎÊı
-				s2 = 8'd2;//½ÓÊÕÊı¾İ¡¢´¦Àí¡¢·µ»Ø
+parameter 		s0 = 8'd0,//ç©ºé—²çŠ¶æ€
+				s1 = 8'd1,//æ¥æ”¶å‚æ•°
+				s2 = 8'd2;//æ¥æ”¶æ•°æ®ã€å¤„ç†ã€è¿”å›
 
 parameter       dumpy = 8'hff;
-parameter		intercept = 64'h000000000000001f;//ÏŞÖÆ´æ´¢·¶Î§
+parameter		intercept = 64'h000000000000001f;//é™åˆ¶å­˜å‚¨èŒƒå›´
 
-reg 		[7:0]				state;//Ä£¿éµÄ×´Ì¬
+reg 		[7:0]				state;//æ¨¡å—çš„çŠ¶æ€
 
-//SPIÄ£¿éµÄÁ¬½Ó
+//SPIæ¨¡å—çš„è¿æ¥
 wire							recflag;
 wire		[7:0]				recdata;
 wire							senflag;
 reg			[7:0]				sendata;
 
-//´æ·Å¼Ó½âÃÜĞèÒªÓÃµ½µÄÊı¾İ
-reg 							recpf;//²ÎÊı½ÓÊÕÍê³É±êÖ¾Î»
-reg			[7:0] 				key [0:7];//ÃÜÔ¿
-reg			[7:0]				vec [0:7];//ÏòÁ¿
-reg			[7:0]				work;//¹¤×÷Ä£Ê½£¬¼Ó½âÃÜ£¬ECB CBC
-reg			[7:0]          		datpad;//Êı¾İÌî³ä·½Ê½01 zero 02 pkcs7
-reg			[31:0]				reclen;//´ı´¦ÀíÊı¾İµÄ³¤¶È
-reg			[7:0]				buff [0:31];//½ÓÊÕ»º³åÇø
-reg			[7:0]				buff2 [0:31];//·¢ËÍ»º³åÇø
+//å­˜æ”¾åŠ è§£å¯†éœ€è¦ç”¨åˆ°çš„æ•°æ®
+reg 							recpf;//å‚æ•°æ¥æ”¶å®Œæˆæ ‡å¿—ä½
+reg			[7:0] 				key [0:7];//å¯†é’¥
+reg			[7:0]				vec [0:7];//å‘é‡
+reg			[7:0]				work;//å·¥ä½œæ¨¡å¼ï¼ŒåŠ è§£å¯†ï¼ŒECB CBC
+reg			[7:0]          		datpad;//æ•°æ®å¡«å……æ–¹å¼01 zero 02 pkcs7
+reg			[31:0]				reclen;//å¾…å¤„ç†æ•°æ®çš„é•¿åº¦
+reg			[7:0]				buff [0:31];//æ¥æ”¶ç¼“å†²åŒº
+reg			[7:0]				buff2 [0:31];//å‘é€ç¼“å†²åŒº
 
-//Êı¾İ½ÓÊÕµÄ±êÖ¾
-reg								cnt_pad;//ÊÇ·ñ½ÓÊÕÁËÌî³ä¸ñÊ½
-reg			[3:0]				cnt_key;//¼ÆËã½ÓÊÕÁË¶àÉÙ¸ö×Ö½ÚµÄÃÜÔ¿
-reg			[3:0]				cnt_vec;//¼ÆËã½ÓÊÕÁË¶àÉÙ¸ö×Ö½ÚµÄÏòÁ¿
-reg			[3:0]				cnt_len;//¼ÆËã½ÓÊÕÁË¶àÉÙ¸ö×Ö½ÚµÄ´ı´¦ÀíÊı¾İ³¤¶È
-reg			[31:0]				cnt_data;//¼ÆËã½ÓÊÕÁË¶àÉÙ¸ö×Ö½ÚµÄÊı¾İ
+//æ•°æ®æ¥æ”¶çš„æ ‡å¿—
+reg								cnt_pad;//æ˜¯å¦æ¥æ”¶äº†å¡«å……æ ¼å¼
+reg			[3:0]				cnt_key;//è®¡ç®—æ¥æ”¶äº†å¤šå°‘ä¸ªå­—èŠ‚çš„å¯†é’¥
+reg			[3:0]				cnt_vec;//è®¡ç®—æ¥æ”¶äº†å¤šå°‘ä¸ªå­—èŠ‚çš„å‘é‡
+reg			[3:0]				cnt_len;//è®¡ç®—æ¥æ”¶äº†å¤šå°‘ä¸ªå­—èŠ‚çš„å¾…å¤„ç†æ•°æ®é•¿åº¦
+reg			[31:0]				cnt_data;//è®¡ç®—æ¥æ”¶äº†å¤šå°‘ä¸ªå­—èŠ‚çš„æ•°æ®
 
-//DESÄ£¿éµÄÁ¬½Ó
-wire 		[1:64]				desout;//desÄ£¿éµÄÊä³ö
-reg			[1:64]				desin;//desÄ£¿éµÄÊäÈë
-reg			[1:64]				deskey;//ÃÜÔ¿
-reg								desmode;//ÉèÖÃdesÄ£Ê½£¬1¼ÓÃÜ£¬0½âÃÜ
+//DESæ¨¡å—çš„è¿æ¥
+wire 		[1:64]				desout;//desæ¨¡å—çš„è¾“å‡º
+reg			[1:64]				desin;//desæ¨¡å—çš„è¾“å…¥
+reg			[1:64]				deskey;//å¯†é’¥
+reg								desmode;//è®¾ç½®desæ¨¡å¼ï¼Œ1åŠ å¯†ï¼Œ0è§£å¯†
 
 
-reg			[31:0]				cnt_handata;//¼ÆËã´¦ÀíÁË¶àÉÙ¸öÊı¾İ
-reg 		[31:0]				cnt_save;//¼ÆËã´æ´¢ÁË¶àÉÙ¸ö´¦ÀíÖ®ºóµÄÊı¾İ
-reg         [31:0]				cnt_send;//¼ÆËã·¢ËÍÁË¶àÉÙ´¦ÀíÖ®ºóµÄÊı¾İ
-reg 		 					wflag;//´¦ÀíÁË8¸ö×Ö½ÚÊı¾İµÄ±êÖ¾
-reg			[1:64]				cbccyc;//CBC½âÃÜµÄÖĞ¼ä±äÁ¿
-reg 							senf;//Êı¾İ·¢ËÍÍê³É±êÖ¾
+reg			[31:0]				cnt_handata;//è®¡ç®—å¤„ç†äº†å¤šå°‘ä¸ªæ•°æ®
+reg 		[31:0]				cnt_save;//è®¡ç®—å­˜å‚¨äº†å¤šå°‘ä¸ªå¤„ç†ä¹‹åçš„æ•°æ®
+reg         [31:0]				cnt_send;//è®¡ç®—å‘é€äº†å¤šå°‘å¤„ç†ä¹‹åçš„æ•°æ®
+reg 		 					wflag;//å¤„ç†äº†8ä¸ªå­—èŠ‚æ•°æ®çš„æ ‡å¿—
+reg			[1:64]				cbccyc;//CBCè§£å¯†çš„ä¸­é—´å˜é‡
+reg 							senf;//æ•°æ®å‘é€å®Œæˆæ ‡å¿—
 
-reg 							recendf;//Êı¾İ½ÓÊÕÍê³É±êÖ¾
+reg 							recendf;//æ•°æ®æ¥æ”¶å®Œæˆæ ‡å¿—
 
-reg							senstf;//Êı¾İÓĞĞ§·µ»ØÆğÊ¼±êÖ¾ÊÇ·ñÒÑ·¢
+reg							senstf;//æ•°æ®æœ‰æ•ˆè¿”å›èµ·å§‹æ ‡å¿—æ˜¯å¦å·²å‘
 
-//SPIÄ£¿é
+//SPIæ¨¡å—
 SPI_Module		spi1(.SCLK(SCLK),.CS(CS),.MOSI(MOSI),.MISO(MISO),.recdata(recdata),
 						  .recflag(recflag),.sendata(sendata),.senflag(senflag));
 
-//DESÄ£¿é
+//DESæ¨¡å—
 DES des1(.data_out(desout),.data_in(desin),.key(deskey),.mode(desmode));
 
-//×´Ì¬ÇĞ»»
+//çŠ¶æ€åˆ‡æ¢
 always @(posedge SCLK or posedge CS) begin
 	if (CS == 1'b1) begin
 		state <= s0;
@@ -129,7 +129,7 @@ always @(posedge SCLK or posedge CS) begin
 	end
 end
 
-//½ÓÊÕ²ÎÊı
+//æ¥æ”¶å‚æ•°
 always @(posedge SCLK or posedge CS) begin
 	if (CS == 1'b1) begin
 		cnt_pad <= 1'b0;
@@ -146,12 +146,12 @@ always @(posedge SCLK or posedge CS) begin
 					datpad <= recdata;
 					cnt_pad <= 1'b1;
 				end
-				else if(work == 8'h11 || work == 8'h12) begin //½ÓÊÕECB¼Ó½âÃÜµÄÊı¾İ
-					if(cnt_key < 4'd8) begin  //½ÓÊÕÃÜÔ¿
+				else if(work == 8'h11 || work == 8'h12) begin //æ¥æ”¶ECBåŠ è§£å¯†çš„æ•°æ®
+					if(cnt_key < 4'd8) begin  //æ¥æ”¶å¯†é’¥
 						key[cnt_key] <= recdata;
 						cnt_key <= cnt_key + 4'd1;
 					end
-					else if(cnt_len < 4'd4) begin  //½ÓÊÕÊı¾İ³¤¶È
+					else if(cnt_len < 4'd4) begin  //æ¥æ”¶æ•°æ®é•¿åº¦
 						case(cnt_len)
 							4'd0:begin
 								reclen[31:24] <= recdata;
@@ -170,16 +170,16 @@ always @(posedge SCLK or posedge CS) begin
 						cnt_len <= cnt_len + 4'd1;
 					end
 				end
-				else if(work == 8'h21 || work == 8'h22) begin //½ÓÊÕCBC¼Ó½âÃÜµÄÊı¾İ
-					if(cnt_key < 4'd8) begin //½ÓÊÕÃÜÔ¿
+				else if(work == 8'h21 || work == 8'h22) begin //æ¥æ”¶CBCåŠ è§£å¯†çš„æ•°æ®
+					if(cnt_key < 4'd8) begin //æ¥æ”¶å¯†é’¥
 						key[cnt_key] <= recdata;
 						cnt_key <= cnt_key + 4'd1;
 					end
-					else if(cnt_vec < 4'd8) begin  //½ÓÊÕÏòÁ¿
+					else if(cnt_vec < 4'd8) begin  //æ¥æ”¶å‘é‡
 						vec[cnt_vec] <= recdata;
 						cnt_vec <= cnt_vec + 4'd1;
 					end
-					else if(cnt_len < 4'd4) begin  //½ÓÊÕÊı¾İ³¤¶È
+					else if(cnt_len < 4'd4) begin  //æ¥æ”¶æ•°æ®é•¿åº¦
 						case(cnt_len)
 							4'd0:begin
 								reclen[31:24] <= recdata;
@@ -211,7 +211,7 @@ always @(posedge SCLK or posedge CS) begin
 	end
 end
 
-//½ÓÊÕÊı¾İ
+//æ¥æ”¶æ•°æ®
 always @(posedge SCLK or posedge CS) begin
 	if (CS == 1'b1) begin
 		cnt_data <= 32'd0;
@@ -221,18 +221,18 @@ always @(posedge SCLK or posedge CS) begin
 		if (recflag == 1'b1) begin
 			//----------
 			if (work == 8'h11 || work == 8'h12 || work == 8'h21 || work == 8'h22) begin
-				if(cnt_data < reclen) begin //½ÓÊÕÊı¾İ
+				if(cnt_data < reclen) begin //æ¥æ”¶æ•°æ®
 					//$display("data = %h",recdata);
 					buff[cnt_data & intercept] <= recdata;
 					cnt_data <= cnt_data + 32'd1;
 				end
 				if(recendf == 1'b0 && (cnt_data + 32'd1) == reclen) begin
 					recendf <= 1'b1;
-					if(work == 8'h11 || work == 8'h21) begin //¶Ô¼ÓÃÜÄ£Ê½½øĞĞÊı¾İÌî³ä
+					if(work == 8'h11 || work == 8'h21) begin //å¯¹åŠ å¯†æ¨¡å¼è¿›è¡Œæ•°æ®å¡«å……
 						//$display("data padding");
 						case(reclen[2:0])
 							3'd0:begin
-								if(datpad == 8'h01) begin     //zeropadding Ìî³ä8¸ö0
+								if(datpad == 8'h01) begin     //zeropadding å¡«å……8ä¸ª0
 									buff[(reclen + 0) & intercept] <= 8'h00; 
 									buff[(reclen + 1) & intercept] <= 8'h00; 
 									buff[(reclen + 2) & intercept] <= 8'h00; 
@@ -242,7 +242,7 @@ always @(posedge SCLK or posedge CS) begin
 									buff[(reclen + 6) & intercept] <= 8'h00; 
 									buff[(reclen + 7) & intercept] <= 8'h00; 
 								end
-								else  begin                   //pkcs7padding Ìî³ä8¸ö8  
+								else  begin                   //pkcs7padding å¡«å……8ä¸ª8  
 									buff[(reclen + 0) & intercept] <= 8'h08; 
 									buff[(reclen + 1) & intercept] <= 8'h08; 
 									buff[(reclen + 2) & intercept] <= 8'h08; 
@@ -255,7 +255,7 @@ always @(posedge SCLK or posedge CS) begin
 								cnt_data <= reclen + 32'd8;
 							end
 							3'd1:begin//7
-								if(datpad == 8'h01) begin      //zeropadding Ìî³ä7¸ö0
+								if(datpad == 8'h01) begin      //zeropadding å¡«å……7ä¸ª0
 									buff[(reclen + 0) & intercept] <= 8'h00; 
 									buff[(reclen + 1) & intercept] <= 8'h00; 
 									buff[(reclen + 2) & intercept] <= 8'h00; 
@@ -264,7 +264,7 @@ always @(posedge SCLK or posedge CS) begin
 									buff[(reclen + 5) & intercept] <= 8'h00; 
 									buff[(reclen + 6) & intercept] <= 8'h00; 
 								end
-								else begin                    //pkcs7padding Ìî³ä7¸ö7
+								else begin                    //pkcs7padding å¡«å……7ä¸ª7
 									buff[(reclen + 0) & intercept] <= 8'h07; 
 									buff[(reclen + 1) & intercept] <= 8'h07; 
 									buff[(reclen + 2) & intercept] <= 8'h07; 
@@ -276,7 +276,7 @@ always @(posedge SCLK or posedge CS) begin
 								cnt_data <= reclen + 32'd7;
 							end
 							3'd2:begin
-								if(datpad == 8'h01) begin     //zeropadding Ìî³ä6¸ö0
+								if(datpad == 8'h01) begin     //zeropadding å¡«å……6ä¸ª0
 									buff[(reclen + 0) & intercept] <= 8'h00; 
 									buff[(reclen + 1) & intercept] <= 8'h00; 
 									buff[(reclen + 2) & intercept] <= 8'h00; 
@@ -284,7 +284,7 @@ always @(posedge SCLK or posedge CS) begin
 									buff[(reclen + 4) & intercept] <= 8'h00; 
 									buff[(reclen + 5) & intercept] <= 8'h00; 
 								end
-								else begin                    //pkcs7padding Ìî³ä6¸ö6
+								else begin                    //pkcs7padding å¡«å……6ä¸ª6
 									buff[(reclen + 0) & intercept] <= 8'h06; 
 									buff[(reclen + 1) & intercept] <= 8'h06; 
 									buff[(reclen + 2) & intercept] <= 8'h06; 
@@ -295,14 +295,14 @@ always @(posedge SCLK or posedge CS) begin
 								cnt_data <= reclen + 32'd6;
 							end
 							3'd3:begin
-								if(datpad == 8'h01) begin      //zeropadding Ìî³ä5¸ö0
+								if(datpad == 8'h01) begin      //zeropadding å¡«å……5ä¸ª0
 									buff[(reclen + 0) & intercept] <= 8'h00; 
 									buff[(reclen + 1) & intercept] <= 8'h00; 
 									buff[(reclen + 2) & intercept] <= 8'h00; 
 									buff[(reclen + 3) & intercept] <= 8'h00; 
 									buff[(reclen + 4) & intercept] <= 8'h00; 
 								end
-								else begin                     //pkcs7padding Ìî³ä5¸ö5
+								else begin                     //pkcs7padding å¡«å……5ä¸ª5
 									buff[(reclen + 0) & intercept] <= 8'h05; 
 									buff[(reclen + 1) & intercept] <= 8'h05; 
 									buff[(reclen + 2) & intercept] <= 8'h05; 
@@ -312,13 +312,13 @@ always @(posedge SCLK or posedge CS) begin
 								cnt_data <= reclen + 32'd5;
 							end
 							3'd4:begin
-								if(datpad == 8'h01) begin     //zeropadding Ìî³ä4¸ö0
+								if(datpad == 8'h01) begin     //zeropadding å¡«å……4ä¸ª0
 									buff[(reclen + 0) & intercept] <= 8'h00; 
 									buff[(reclen + 1) & intercept] <= 8'h00; 
 									buff[(reclen + 2) & intercept] <= 8'h00; 
 									buff[(reclen + 3) & intercept] <= 8'h00; 
 								end
-								else begin                    //pkcs7padding Ìî³ä4¸ö4
+								else begin                    //pkcs7padding å¡«å……4ä¸ª4
 									buff[(reclen + 0) & intercept] <= 8'h04; 
 									buff[(reclen + 1) & intercept] <= 8'h04; 
 									buff[(reclen + 2) & intercept] <= 8'h04; 
@@ -327,12 +327,12 @@ always @(posedge SCLK or posedge CS) begin
 								cnt_data <= reclen + 32'd4;
 							end
 							3'd5:begin
-								if(datpad == 8'h01) begin     //zeropadding Ìî³ä3¸ö0
+								if(datpad == 8'h01) begin     //zeropadding å¡«å……3ä¸ª0
 									buff[(reclen + 0) & intercept] <= 8'h00; 
 									buff[(reclen + 1) & intercept] <= 8'h00; 
 									buff[(reclen + 2) & intercept] <= 8'h00; 
 								end
-								else begin                    //pkcs7padding Ìî³ä3¸ö3
+								else begin                    //pkcs7padding å¡«å……3ä¸ª3
 									buff[(reclen + 0) & intercept] <= 8'h03; 
 									buff[(reclen + 1) & intercept] <= 8'h03; 
 									buff[(reclen + 2) & intercept] <= 8'h03;  
@@ -340,21 +340,21 @@ always @(posedge SCLK or posedge CS) begin
 								cnt_data <= reclen + 32'd3;
 							end
 							3'd6:begin
-								if(datpad == 8'h01) begin     //zeropadding Ìî³ä2¸ö0
+								if(datpad == 8'h01) begin     //zeropadding å¡«å……2ä¸ª0
 									buff[(reclen + 0) & intercept] <= 8'h00; 
 									buff[(reclen + 1) & intercept] <= 8'h00; 
 								end
-								else begin                    //pkcs7padding Ìî³ä2¸ö2
+								else begin                    //pkcs7padding å¡«å……2ä¸ª2
 									buff[(reclen + 0) & intercept] <= 8'h02; 
 									buff[(reclen + 1) & intercept] <= 8'h02;  
 								end
 								cnt_data <= reclen + 32'd2;
 							end
 							3'd7:begin
-								if(datpad == 8'h01) begin     //zeropadding Ìî³ä1¸ö0
+								if(datpad == 8'h01) begin     //zeropadding å¡«å……1ä¸ª0
 									buff[(reclen + 0) & intercept] <= 8'h00; 
 								end
-								else begin                    //pkcs7padding Ìî³ä1¸ö1
+								else begin                    //pkcs7padding å¡«å……1ä¸ª1
 									buff[(reclen + 0) & intercept] <= 8'h01;  
 								end
 								cnt_data <= reclen + 32'd1;
@@ -374,7 +374,7 @@ always @(posedge SCLK or posedge CS) begin
 	end
 end
 
-//¶Ô½ÓÊÕµÄÊı¾İ½øĞĞ´¦Àí
+//å¯¹æ¥æ”¶çš„æ•°æ®è¿›è¡Œå¤„ç†
 always @(posedge SCLK or posedge CS) begin
 	if (CS == 1'b1) begin
 		cnt_handata <= 32'd0;
@@ -385,14 +385,14 @@ always @(posedge SCLK or posedge CS) begin
 			if(cnt_handata + 32'd8 <= cnt_data) begin
 			//$display("data handle");
 				wflag <= 1'b1;
-				if(work == 8'h11) begin //ECB¼ÓÃÜ
+				if(work == 8'h11) begin //ECBåŠ å¯†
 					desmode <= 1'b1;
 					deskey <= {key[0],key[1],key[2],key[3],key[4],key[5],key[6],key[7]};
 					desin <= {buff[(cnt_handata + 0) & intercept],buff[(cnt_handata + 1) & intercept],buff[(cnt_handata + 2) & intercept],buff[(cnt_handata + 3) & intercept],
 							  buff[(cnt_handata + 4) & intercept],buff[(cnt_handata + 5) & intercept],buff[(cnt_handata + 6) & intercept],buff[(cnt_handata + 7) & intercept]};
 					cnt_handata <= cnt_handata + 32'd8;
 				end
-				else if (work == 8'h12) begin //ECB½âÃÜ
+				else if (work == 8'h12) begin //ECBè§£å¯†
 					//$display("ECB DE handle");
 					desmode <= 1'b0;
 					deskey <= {key[0],key[1],key[2],key[3],key[4],key[5],key[6],key[7]};
@@ -402,7 +402,7 @@ always @(posedge SCLK or posedge CS) begin
 					//$display("ECB DE data=%h",{buff[cnt_handata + 0],buff[cnt_handata + 1],buff[cnt_handata + 2],buff[cnt_handata + 3],
 							  //buff[cnt_handata + 4],buff[cnt_handata + 5],buff[cnt_handata + 6],buff[cnt_handata + 7]});
 				end
-				else if (work == 8'h21) begin //CBC¼ÓÃÜ
+				else if (work == 8'h21) begin //CBCåŠ å¯†
 					if(cnt_handata == 32'd0) begin
 						desmode <= 1'b1;
 						deskey <= {key[0],key[1],key[2],key[3],key[4],key[5],key[6],key[7]};
@@ -423,7 +423,7 @@ always @(posedge SCLK or posedge CS) begin
 						cnt_handata <= cnt_handata + 32'd8;
 					end
 				end
-				else if (work == 8'h22) begin //CBC½âÃÜ
+				else if (work == 8'h22) begin //CBCè§£å¯†
 				 	desmode <= 1'b0;
 					deskey <= {key[0],key[1],key[2],key[3],key[4],key[5],key[6],key[7]};
 					desin <= {buff[(cnt_handata + 0) & intercept],buff[(cnt_handata + 1) & intercept],buff[(cnt_handata + 2) & intercept],buff[(cnt_handata + 3) & intercept],
@@ -452,7 +452,7 @@ always @(posedge SCLK or posedge CS) begin
 	end
 end
 
-//´æ´¢´¦ÀíºóµÄÊı¾İ
+//å­˜å‚¨å¤„ç†åçš„æ•°æ®
 always @(posedge SCLK or posedge CS) begin
 	if (CS == 1'b1) begin
 		cnt_save <= 32'd0;
@@ -543,10 +543,10 @@ always @(posedge SCLK or posedge CS) begin
 		end
 		
 //		if(work == 8'h12 || work == 8'h22) begin
-//			if(cnt_data >= reclen && cnt_handata == cnt_data) begin //¶Ô½âÃÜÊı¾İÈ¥µôÌî³ä
+//			if(cnt_data >= reclen && cnt_handata == cnt_data) begin //å¯¹è§£å¯†æ•°æ®å»æ‰å¡«å……
 //				if(work == 8'h12 || work == 8'h22) begin
 //					//$display("move padding");
-//					if(datpad == 8'h01) begin //È¥µôzeropadding
+//					if(datpad == 8'h01) begin //å»æ‰zeropadding
 //						if({buff2[cnt_handata - 8],buff2[cnt_handata - 7],buff2[cnt_handata - 6],buff2[cnt_handata - 5],
 //					 		buff2[cnt_handata - 4],buff2[cnt_handata - 3],buff2[cnt_handata - 2],buff2[cnt_handata - 1]} == 64'h00) begin
 //							cnt_save <= cnt_handata - 8;
@@ -576,7 +576,7 @@ always @(posedge SCLK or posedge CS) begin
 //							cnt_save <= cnt_handata - 1;
 //						end
 //					end
-//					else begin //È¥µôpkcs7padding
+//					else begin //å»æ‰pkcs7padding
 //						cnt_save <= cnt_handata - buff2[cnt_handata - 1];
 //						//$display("cnt_handata=%h",cnt_handata);
 //						//$display("buff2=%h",buff2[cnt_handata - 1]);
@@ -590,7 +590,7 @@ always @(posedge SCLK or posedge CS) begin
 	end
 end
 
-//Êı¾İ·¢ËÍ
+//æ•°æ®å‘é€
 always @(posedge SCLK or posedge CS) begin
 	if (CS == 1'b1) begin
 		cnt_send <= 32'd0;

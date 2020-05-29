@@ -36,9 +36,9 @@ reg 				[3:0]					cnt_bit;
 reg				[7:0]					rec_buff;
 reg				[7:0]					sen_buff;
 
-reg    									recendf;//½ÓÊÕÍêÒ»¸ö×Ö½ÚÊı¾İµÄ±êÖ¾				
+reg    									recendf;//æ¥æ”¶å®Œä¸€ä¸ªå­—èŠ‚æ•°æ®çš„æ ‡å¿—				
 
-//½ÓÊÕÊı¾İ
+//æ¥æ”¶æ•°æ®
 always @(negedge SCLK,posedge CS) begin
 	if(CS == 1'b1) begin
 		rec_buff <= 8'h00;
@@ -49,7 +49,7 @@ always @(negedge SCLK,posedge CS) begin
 	end
 end
 
-//µ÷ÕûÎ»
+//è°ƒæ•´ä½
 always @(negedge SCLK,posedge CS) begin
 	if(CS == 1'b1) begin
 		cnt_bit <= 4'd0;
@@ -65,7 +65,7 @@ always @(negedge SCLK,posedge CS) begin
 	end
 end
 
-//½«½ÓÊÕµ½µÄÊı¾İËÍµ½ÆäËûÄ£¿é
+//å°†æ¥æ”¶åˆ°çš„æ•°æ®é€åˆ°å…¶ä»–æ¨¡å—
 always @(posedge SCLK,posedge CS) begin
 	if(CS == 1'b1) begin
 		recflag <= 1'b0;
@@ -82,7 +82,7 @@ always @(posedge SCLK,posedge CS) begin
 	end
 end
 
-//·¢ËÍÊı¾İ
+//å‘é€æ•°æ®
 always @(posedge SCLK,posedge CS) begin
 	if(CS == 1'b1) begin
 		MISO <= 1'b1;
@@ -93,7 +93,7 @@ always @(posedge SCLK,posedge CS) begin
 	end
 end
 
-//·¢ËÍÍêÒ»¸ö×Ö½ÚÊı¾İµÄ±êÖ¾
+//å‘é€å®Œä¸€ä¸ªå­—èŠ‚æ•°æ®çš„æ ‡å¿—
 always @(posedge SCLK,posedge CS) begin
 	if(CS == 1'b1) begin
 		senflag <= 1'b0;
